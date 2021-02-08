@@ -1,6 +1,20 @@
 import React, { Component } from 'react';
 import './App.css';
+import styled from 'styled-components';
 import Person from './Person/Person'
+
+const StyledButton = styled.button`
+  background-color: ${props => props.alt ? 'red' : 'green'};
+  font: inherit;
+  cursor: pointer;
+  padding: 4px;
+  color: white;
+  margin: 10px 3px 0px 0px;
+  &:hover {
+    background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};;
+    color: black;
+  }
+`
 
 class App extends Component {
 
@@ -36,14 +50,6 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'green',
-      font: 'inherit',
-      cursor: 'pointer',
-      padding: '4px',
-      color: 'white',
-      margin: '10px 3px 0px 0px'
-    }
 
     let persons = null
 
@@ -61,7 +67,7 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <button style = {style} onClick={this.tooglePerson}>Switch Name</button>
+        <StyledButton alt={this.state.showPerson} onClick={this.tooglePerson}>Switch Name</StyledButton>
         {persons}
       </div>
     )
