@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Person from './Person/Person'
+import Person from './Person/Person';
+import Radium, { StyleRoot } from 'radium';
 
 class App extends Component {
 
@@ -42,7 +43,11 @@ class App extends Component {
       cursor: 'pointer',
       padding: '4px',
       color: 'white',
-      margin: '10px 3px 0px 0px'
+      margin: '10px 3px 0px 0px',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     }
 
     let persons = null
@@ -58,15 +63,31 @@ class App extends Component {
          changed={(event)=> this.changeNameHandler(event, person.id)}/>
         })}
     </div>
+    style.backgroundColor = 'red'
+    style[':hover'] = {
+      backgroundColor: 'salmon',
+      color: 'black'
+    }
+    }
+    
+    const classes = []
+    if (this.state.persons.length <= 1) {
+      classes.push('red')
+    }
+    if (this.state.persons.length <= 2) {
+      classes.push('bold')
     }
     return (
+      <StyleRoot>
       <div className="App">
         <button style = {style} onClick={this.tooglePerson}>Switch Name</button>
+        <p className={classes.join(' ')}>This is really good working</p>
         {persons}
       </div>
+      </StyleRoot>
     )
   }
 
 }
 
-export default App;
+export default Radium(App);
